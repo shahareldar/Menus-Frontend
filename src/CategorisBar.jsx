@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import StyledEngineProvider from '@mui/material/styles';
 import './CategoriesBar.css';
 
 function samePageLinkNavigation(event) {
@@ -21,9 +20,9 @@ function samePageLinkNavigation(event) {
 
 function LinkTab(props) {
   return (
-    <StyledEngineProvider injectFirst>
-      <Tab component="a" {...props} />
-    </StyledEngineProvider>
+    // <StyledEngineProvider injectFirst>
+    <Tab component="a" {...props} />
+    // </StyledEngineProvider>
   );
 }
 
@@ -41,19 +40,18 @@ export default function NavTabs() {
   };
 
   return (
-    <StyledEngineProvider injectFirst>
-      <Box className="cbar" sx={{ width: '100%' }}>
-        <Tabs
-          TabIndicatorProps={{ sx: { backgroundColor: '#646cff' } }}
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="Page One" href="#" />
-          <LinkTab label="Page Two" href="#" />
-          <LinkTab label="Page Three" href="#" />
-        </Tabs>
-      </Box>
-    </StyledEngineProvider>
+    <Box className="cbar" sx={{ width: '100%' }}>
+      <Tabs
+        // TabIndicatorProps={{ sx: { backgroundColor: '#646cff' } }}
+        value={value}
+        onChange={handleChange}
+        aria-label="nav tabs example"
+        className="cbar"
+      >
+        <LinkTab label="Page One" href="#" />
+        <LinkTab label="Page Two" href="#" />
+        <LinkTab label="Page Three" href="#" />
+      </Tabs>
+    </Box>
   );
 }
