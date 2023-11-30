@@ -1,21 +1,19 @@
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import './Button.css';
-// import StyledEngineProvider from '@mui/material/styles';
 
-const SimpleButton = ({ onClick, text }) => {
+const SimpleButton = ({ onClick, text, style }) => {
   return (
-    // <StyledEngineProvider injectFirst>
-    <Button className="btn" variant="contained" onClick={onClick}>
+    <Button className="btn" variant="contained" onClick={onClick} sx={style}>
       {text}
     </Button>
-    // </StyledEngineProvider>
   );
 };
 
 SimpleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string,
+  style: PropTypes.any,
 };
 
 export default SimpleButton;
