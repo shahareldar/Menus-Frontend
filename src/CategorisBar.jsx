@@ -35,18 +35,18 @@ export default function NavTabs() {
     { label: 'Page Two', href: '#' },
   ]);
   const [newTabText, setNewTabText] = useState('');
+  const [showInput, setShowInput] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleAddTab = () => {
-    // הוספת טאב חדש לרשימת הטאבים
     setTabs([...tabs, { label: newTabText, href: '#' }]);
-    // בכדי להעביר את הפוקוס לטאב החדש
     setValue(tabs.length);
-    // לאחר הוספת הטאב, לנקות את הטקסט של הטאב החדש
     setNewTabText('');
+    // להסתיר את הinput לאחר הוספת הטאב
+    setShowInput(false);
   };
 
   return (
@@ -78,14 +78,19 @@ export default function NavTabs() {
       <Button
         style={{ position: 'absolute', right: '0' }}
         text={'+ add'}
-        onClick={handleAddTab}
+        onClick={() => setShowInput(true)}
       ></Button>
       {/* טופס להוספת טאב חדש */}
-      <input
-        type="text"
-        value={newTabText}
-        onChange={(e) => setNewTabText(e.target.value)}
-      />
+      {showInput && (
+        <div>
+          <input
+            type="text"
+            value={newTabText}
+            onChange={(e) => setNewTabText(e.target.value)}
+          />
+          <Button onClick={handleAddTab} text={'Add Tab'}></Button>
+        </div>
+      )}
     </Box>
   );
 }
