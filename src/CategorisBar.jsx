@@ -42,55 +42,64 @@ export default function NavTabs() {
   };
 
   const handleAddTab = () => {
-    setTabs([...tabs, { label: newTabText, href: '#' }]);
-    setValue(tabs.length);
-    setNewTabText('');
-    // להסתיר את הinput לאחר הוספת הטאב
-    setShowInput(false);
+    if (newTabText.trim() !== '') {
+      setTabs([...tabs, { label: newTabText, href: '#' }]);
+      setValue(tabs.length);
+      setNewTabText('');
+      setShowInput(false);
+    }
   };
 
   return (
-    <Box
-      sx={{
-        width: '55%',
-        display: 'flex',
-        position: 'relative',
-        left: '25vw',
-      }}
-    >
-      <Tabs
-        sx={{ width: '99%' }}
-        TabIndicatorProps={{
-          sx: { backgroundColor: '#646cff' },
+    <>
+      <Box
+        sx={{
+          width: '55vw',
+          display: 'flex',
+          position: 'relative',
+          left: '25vw',
         }}
-        value={value}
-        onChange={handleChange}
-        aria-label="nav tabs example"
-        className="cbar"
-        variant="scrollable"
-        scrollButtons="auto"
       >
-        {tabs.map((tab, index) => (
-          <LinkTab key={index} label={tab.label} href={tab.href} />
-        ))}
-      </Tabs>
-      <div style={{ width: '100px' }}></div>
-      <Button
-        style={{ position: 'absolute', right: '0' }}
-        text={'+ add'}
-        onClick={() => setShowInput(true)}
-      ></Button>
-      {/* טופס להוספת טאב חדש */}
-      {showInput && (
-        <div>
-          <input
-            type="text"
-            value={newTabText}
-            onChange={(e) => setNewTabText(e.target.value)}
-          />
-          <Button onClick={handleAddTab} text={'Add Tab'}></Button>
-        </div>
-      )}
-    </Box>
+        <Tabs
+          sx={{ width: '99%' }}
+          TabIndicatorProps={{
+            sx: { backgroundColor: '#646cff' },
+          }}
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+          className="cbar"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
+          {tabs.map((tab, index) => (
+            <LinkTab key={index} label={tab.label} href={tab.href} />
+          ))}
+        </Tabs>
+        <div style={{ width: '100px' }}></div>
+        <Button
+          style={{ position: 'absolute', right: '0' }}
+          text={'+ add'}
+          onClick={() => setShowInput(true)}
+        ></Button>
+        {showInput && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '48px',
+              left: '46vw',
+              display: 'flex',
+            }}
+          >
+            <input
+              type="text"
+              value={newTabText}
+              onChange={(e) => setNewTabText(e.target.value)}
+            />
+            <Button onClick={handleAddTab} text={'✅'}></Button>
+          </div>
+        )}
+      </Box>
+    </>
   );
 }
