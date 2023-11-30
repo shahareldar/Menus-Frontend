@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import './CategoriesBar.css';
 import Button from './Button.jsx';
+import { useState } from 'react';
 
 // function samePageLinkNavigation(event) {
 //   if (
@@ -28,10 +29,24 @@ function LinkTab(props) {
 }
 
 export default function NavTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [tabs, setTabs] = useState([
+    { label: 'count is', href: '#' },
+    { label: 'Page Two', href: '#' },
+  ]);
+  const [newTabText, setNewTabText] = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleAddTab = () => {
+    // הוספת טאב חדש לרשימת הטאבים
+    setTabs([...tabs, { label: newTabText, href: '#' }]);
+    // בכדי להעביר את הפוקוס לטאב החדש
+    setValue(tabs.length);
+    // לאחר הוספת הטאב, לנקות את הטקסט של הטאב החדש
+    setNewTabText('');
   };
 
   return (
@@ -44,7 +59,7 @@ export default function NavTabs() {
       }}
     >
       <Tabs
-        sx={{ width: '100%' }}
+        sx={{ width: '99%' }}
         TabIndicatorProps={{
           sx: { backgroundColor: '#646cff' },
         }}
@@ -55,59 +70,22 @@ export default function NavTabs() {
         variant="scrollable"
         scrollButtons="auto"
       >
-        <LinkTab label="count is" href="#" />
-        <LinkTab label="Page Two" href="#" />
-        <LinkTab label="Page 3" href="#" />
-        <LinkTab label="Page 4" href="#" />
-        <LinkTab label="Page 5" href="#" />
-        <LinkTab label="Page 6" href="#" />
-        <LinkTab label="Page 7" href="#" />
-        <LinkTab label="Page 11" href="#" />
-        <LinkTab label="Page 10" href="#" />
-        <LinkTab label="Page 9" href="#" />
-        <LinkTab label="Page 8" href="#" />
-        <LinkTab label="count is" href="#" />
-        <LinkTab label="Page Two" href="#" />
-        <LinkTab label="Page 3" href="#" />
-        <LinkTab label="Page 4" href="#" />
-        <LinkTab label="Page 5" href="#" />
-        <LinkTab label="Page 6" href="#" />
-        <LinkTab label="Page 7" href="#" />
-        <LinkTab label="Page 11" href="#" />
-        <LinkTab label="Page 10" href="#" />
-        <LinkTab label="Page 9" href="#" />
-        <LinkTab label="Page 8" href="#" />
-        <LinkTab label="count is" href="#" />
-        <LinkTab label="Page Two" href="#" />
-        <LinkTab label="Page 3" href="#" />
-        <LinkTab label="Page 4" href="#" />
-        <LinkTab label="Page 5" href="#" />
-        <LinkTab label="Page 6" href="#" />
-        <LinkTab label="Page 7" href="#" />
-        <LinkTab label="Page 11" href="#" />
-        <LinkTab label="Page 10" href="#" />
-        <LinkTab label="Page 9" href="#" />
-        <LinkTab label="Page 8" href="#" />
-        <LinkTab label="count is" href="#" />
-        <LinkTab label="Page Two" href="#" />
-        <LinkTab label="Page 3" href="#" />
-        <LinkTab label="Page 4" href="#" />
-        <LinkTab label="Page 5" href="#" />
-        <LinkTab label="Page 6" href="#" />
-        <LinkTab label="Page 7" href="#" />
-        <LinkTab label="Page 11" href="#" />
-        <LinkTab label="Page 10" href="#" />
-        <LinkTab label="Page 9" href="#" />
-        <LinkTab label="Page 8" href="#" />
+        {tabs.map((tab, index) => (
+          <LinkTab key={index} label={tab.label} href={tab.href} />
+        ))}
       </Tabs>
       <div style={{ width: '100px' }}></div>
       <Button
         style={{ position: 'absolute', right: '0' }}
         text={'+ add'}
-        onClick={() => {
-          /**/
-        }}
+        onClick={handleAddTab}
       ></Button>
+      {/* טופס להוספת טאב חדש */}
+      <input
+        type="text"
+        value={newTabText}
+        onChange={(e) => setNewTabText(e.target.value)}
+      />
     </Box>
   );
 }
