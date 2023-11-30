@@ -2,6 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import StyledEngineProvider from '@mui/material/styles';
+import './CategoriesBar.css';
 
 function samePageLinkNavigation(event) {
   if (
@@ -18,7 +20,11 @@ function samePageLinkNavigation(event) {
 }
 
 function LinkTab(props) {
-  return <Tab component="a" {...props} />;
+  return (
+    <StyledEngineProvider injectFirst>
+      <Tab component="a" {...props} />
+    </StyledEngineProvider>
+  );
 }
 
 export default function NavTabs() {
@@ -35,15 +41,19 @@ export default function NavTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-        <LinkTab
-          label="Page One"
-          href="https://translate.google.co.il/?hl=iw&tab=TT"
-        />
-        <LinkTab label="Page Two" href="#" />
-        <LinkTab label="Page Three" href="#" />
-      </Tabs>
-    </Box>
+    <StyledEngineProvider injectFirst>
+      <Box className="cbar" sx={{ width: '100%' }}>
+        <Tabs
+          TabIndicatorProps={{ sx: { backgroundColor: '#646cff' } }}
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+        >
+          <LinkTab label="Page One" href="#" />
+          <LinkTab label="Page Two" href="#" />
+          <LinkTab label="Page Three" href="#" />
+        </Tabs>
+      </Box>
+    </StyledEngineProvider>
   );
 }
