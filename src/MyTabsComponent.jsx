@@ -56,6 +56,15 @@ const MyTabsComponent = () => {
         scrollable
         value={scrollIndex}
         onChange={(_, newValue) => setScrollIndex(newValue)}
+        TabIndicatorProps={{
+          sx: { backgroundColor: '#646cff' },
+        }}
+        textColor="white"
+        sx={{
+          '.Mui-selected': {
+            color: '#646cff',
+          },
+        }}
       >
         {tabs.map((tab) => (
           <Tab
@@ -63,6 +72,7 @@ const MyTabsComponent = () => {
             label={
               editingTabId === tab.id ? (
                 <TextField
+                  //   style={{ height: '2rem' }}
                   value={tab.label}
                   autoFocus
                   onBlur={() => setEditingTabId(null)}
