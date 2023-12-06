@@ -51,55 +51,50 @@ export default function NavTabs() {
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          width: '55vw',
-          display: 'flex',
-          position: 'relative',
-          left: '25vw',
+    <Box
+      sx={{
+        width: '55%',
+        display: 'flex',
+        position: 'relative',
+        left: '25vw',
+        alignItems: 'flex-end',
+      }}
+    >
+      <Tabs
+        sx={{ width: '99%' }}
+        TabIndicatorProps={{
+          sx: { backgroundColor: '#646cff' },
         }}
+        value={value}
+        onChange={handleChange}
+        aria-label="nav tabs example"
+        className="cbar"
+        variant="scrollable"
+        scrollButtons="auto"
       >
-        <Tabs
-          sx={{ width: '99%' }}
-          TabIndicatorProps={{
-            sx: { backgroundColor: '#646cff' },
-          }}
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-          className="cbar"
-          variant="scrollable"
-          scrollButtons="auto"
-        >
-          {tabs.map((tab, index) => (
-            <LinkTab key={index} label={tab.label} href={tab.href} />
-          ))}
-        </Tabs>
-        <div style={{ width: '100px' }}></div>
+        {tabs.map((tab, index) => (
+          <LinkTab key={index} label={tab.label} href={tab.href} />
+        ))}
+      </Tabs>
+      <div
+        style={{ marginLeft: '10px', display: 'flex', alignItems: 'flex-end' }}
+      >
         <Button
           style={{ position: 'absolute', right: '0' }}
           text={'+ add'}
           onClick={() => setShowInput(true)}
-        ></Button>
+        />
         {showInput && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '48px',
-              left: '46vw',
-              display: 'flex',
-            }}
-          >
+          <div>
             <input
               type="text"
               value={newTabText}
               onChange={(e) => setNewTabText(e.target.value)}
             />
-            <Button onClick={handleAddTab} text={'✅'}></Button>
+            <Button onClick={handleAddTab}>Add Tab</Button>
           </div>
         )}
-      </Box>
-    </>
+      </div>
+    </Box>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Button from './Button.jsx';
 import NavTabs from './CategorisBar.jsx';
+import MyTabsComponent from './MyTabsComponent.jsx';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,6 +17,7 @@ function App() {
         ></Button>
       </div>
       <NavTabs />
+      <MyTabsComponent></MyTabsComponent>
     </>
   );
 }
